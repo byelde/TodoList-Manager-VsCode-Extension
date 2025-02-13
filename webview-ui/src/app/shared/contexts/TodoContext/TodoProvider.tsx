@@ -1,6 +1,7 @@
-import React, { createContext, useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
+import { DataContext } from "./TodoContext";
 
-interface IData {
+export interface IData {
   data: string;
   func: () => void;
 };
@@ -8,8 +9,6 @@ interface IData {
 interface IDataProviderProps {
   children: React.ReactNode;
 }
-
-export const DataContext = createContext<IData>({} as IData);
 
 export const DataProvider: React.FC<IDataProviderProps> = ({children}) => {
 
