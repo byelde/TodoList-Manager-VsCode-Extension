@@ -1,11 +1,55 @@
 // Place your settings in this file to overwrite default and user settings.
 {
 	"files.exclude": {
-		"out": false // set this to true to hide the "out" folder with the compiled JS files
-	},
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "out": true,
+    ".vscode-test.mjs": true,
+    ".vscodeignore": true,
+    "README.md": true,
+    "package-lock.json": true,
+    "eslint.config.mjs": true,
+    "vsc-extension-quickstart.md": true,
+    "CHANGELOG.md": true,
+    "webview-ui/eslint.config.js": true,
+    "webview-ui/package-lock.json": true,
+    "webview-ui/README.md": true,
+    "webview-ui/tsconfig.app.json": true,
+    "webview-ui/tsconfig.node.json": true,
+    "webview-ui/vite.config.js.map": true,
+    "webview-ui/vite.config.ts": true,
+    "webview-ui/.gitignore": true,
+    ".gitignore": true,
+    "webview-ui/node_modules": true,
+    "node_modules": true
+  },
 	"search.exclude": {
 		"out": true // set this to false to include "out" folder in search results
 	},
 	// Turn off tsc task auto detection since we have the necessary tasks as npm scripts
-	"typescript.tsc.autoDetect": "off"
+  "typescript.tsc.autoDetect": "off",
+  "hide-files.files": [
+    ".vscode-test.mjs",
+    ".vscodeignore",
+    "README.md",
+    "package-lock.json",
+    "eslint.config.mjs",
+    "vsc-extension-quickstart.md",
+    "CHANGELOG.md",
+    "webview-ui/eslint.config.js",
+    "webview-ui/package-lock.json",
+    "webview-ui/README.md",
+    "webview-ui/tsconfig.app.json",
+    "webview-ui/tsconfig.node.json",
+    "webview-ui/vite.config.js.map",
+    "webview-ui/vite.config.ts",
+    "webview-ui/.gitignore",
+    ".gitignore",
+    "webview-ui/node_modules",
+    "node_modules"
+  ]
 }
