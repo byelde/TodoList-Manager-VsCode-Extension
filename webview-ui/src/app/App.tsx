@@ -1,13 +1,14 @@
 import { Routes } from "./routes"
-import { DataProvider } from "./shared/contexts"
+import { TodoProvider } from "./shared/contexts"
+
 
 
 function App() {
   
   return (
-    <DataProvider>
+    <TodoProvider>
       <Routes/>
-    </DataProvider>
+    </TodoProvider>
   )
 }
 
