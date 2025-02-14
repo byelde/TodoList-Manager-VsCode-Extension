@@ -28,8 +28,14 @@ export const TodoInput = () => {
     setTextInput("");
 
     console.log(`${item.id} ${item.text} ${item.isChecked} added.`)
-
   }
+
+  // Handle the key press event will activate the addTodoItem 
+  // function on VSCodeTextField
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    return e.key === "Enter" ? addTodoItem() : null;
+  }
+
 
   return (
     <div className="todo-input-container">
@@ -40,6 +46,7 @@ export const TodoInput = () => {
           // and getting it data;
           setTextInput((e.target as HTMLInputElement).value)
         }}
+        onKeyUp={handleKeyPress}
         placeholder="Enter text here"
       />
 
