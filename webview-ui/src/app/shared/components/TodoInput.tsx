@@ -32,7 +32,7 @@ export const TodoInput = () => {
   }
 
   return (
-    <div>
+    <div className="todo-input-container">
       <VSCodeTextField
         value={textInput}
         onChange={(e)=>{

@@ -1,7 +1,11 @@
 import { VSCodeCheckbox, VSCodeButton } from "@vscode/webview-ui-toolkit/react"
+import { useState } from "react";
+
 import { TodoItem } from "../types/TodoItem"
 import { useTodoContext } from "../contexts";
-import { useState } from "react";
+
+import { FaTrash } from "react-icons/fa";
+
 
 export const TodoListElement = (props: TodoItem) => {
 
@@ -33,10 +37,14 @@ export const TodoListElement = (props: TodoItem) => {
   }
 
   return(
-    <li>
+    <li className="todo-item">
       <VSCodeCheckbox checked={isChecked} onChange={toggleTodoItem}/>
-      <span>{props.text}</span>
-      <VSCodeButton onClick={deleteTodoItem}> </VSCodeButton>
+      
+      <span className={isChecked ? 'checked' : ''}>{props.text}</span>
+      
+      <VSCodeButton onClick={deleteTodoItem}>
+        <FaTrash/>
+      </VSCodeButton>
     </li>
   )
 }
