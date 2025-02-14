@@ -10,7 +10,6 @@
     "out": true,
     ".vscode-test.mjs": true,
     ".vscodeignore": true,
-    "README.md": true,
     "package-lock.json": true,
     "eslint.config.mjs": true,
     "vsc-extension-quickstart.md": true,
@@ -32,24 +31,4 @@
 	},
 	// Turn off tsc task auto detection since we have the necessary tasks as npm scripts
   "typescript.tsc.autoDetect": "off",
-  "hide-files.files": [
-    ".vscode-test.mjs",
-    ".vscodeignore",
-    "README.md",
-    "package-lock.json",
-    "eslint.config.mjs",
-    "vsc-extension-quickstart.md",
-    "CHANGELOG.md",
-    "webview-ui/eslint.config.js",
-    "webview-ui/package-lock.json",
-    "webview-ui/README.md",
-    "webview-ui/tsconfig.app.json",
-    "webview-ui/tsconfig.node.json",
-    "webview-ui/vite.config.js.map",
-    "webview-ui/vite.config.ts",
-    "webview-ui/.gitignore",
-    ".gitignore",
-    "webview-ui/node_modules",
-    "node_modules"
-  ]
 }
