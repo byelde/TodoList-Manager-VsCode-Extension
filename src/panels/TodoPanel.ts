@@ -33,8 +33,7 @@ export class TodoPanel {
   private constructor(panel: WebviewPanel, extensionUri: Uri) {
     this._panel = panel;
 
-    // Set an event listener to listen for when the panel is disposed (i.e. when the user closes
-    // the panel or when the panel is closed programmatically)
+    // Set an event listener to listen for when the panel is disposed
     this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
 
     // Set the HTML content for the webview panel
@@ -60,21 +59,13 @@ export class TodoPanel {
     } else {
       // If a webview panel does not already exist create and show a new one
       const panel = window.createWebviewPanel(
-        // Panel view type
-        "todoview",
-        // Panel title
-        "Todo",
-        // The editor column the panel should be displayed in
-        ViewColumn.One,
-        // Extra panel configurations
-        {
-          // Enable JavaScript in the webview
-          enableScripts: true,
-          // Restrict the webview to only load resources from the `out` and `webview-ui/build` directories
-          localResourceRoots: [
-            Uri.joinPath(extensionUri, "out"),
-            Uri.joinPath(extensionUri, "webview-ui/build"),
-          ],
+        "todoview",     // Panel view type (simple string)
+        "Todo",         // Panel title
+        ViewColumn.One, // The editor column the panel should be displayed in
+        { // Extra panel configurations
+
+          enableScripts: true, // Enable JavaScript in the webview
+          localResourceRoots: [Uri.joinPath(extensionUri, "webview-ui/build")], // Restrict the webview to only load resources from the `webview-ui/build`
         }
       );
 
@@ -86,13 +77,12 @@ export class TodoPanel {
    * Cleans up and disposes of webview resources when the webview panel is closed.
    */
   public dispose() {
-    TodoPanel.currentPanel = undefined;
 
-    // Dispose of the current webview panel
-    this._panel.dispose();
+    TodoPanel.currentPanel = undefined; // Clear the current panel
 
-    // Dispose of all disposables (i.e. commands) for the current webview panel
-    while (this._disposables.length) {
+    this._panel.dispose(); // Dispose of the current webview panel
+
+    while (this._disposables.length) { // Dispose of all disposables (i.e. commands) for the current webview panel
       const disposable = this._disposables.pop();
       if (disposable) {
         disposable.dispose();
@@ -112,6 +102,7 @@ export class TodoPanel {
    * rendered within the webview panel
    */
   private _getWebviewContent(webview: Webview, extensionUri: Uri) {
+
     // The CSS file from the React build output
     const stylesUri = getUri(webview, extensionUri, [
       "webview-ui",
@@ -159,7 +150,6 @@ export class TodoPanel {
     webview.onDidReceiveMessage(
       (message: any) => {
         const command = message.command;
-        const text = message.text;
 
         switch (command) {
           case "ready":
