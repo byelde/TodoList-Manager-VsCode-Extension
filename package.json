@@ -12,6 +12,25 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        { 
+          "id": "react-todo-sideBar",
+          "title": "ToDo List",
+          "icon": "src/media/tasklist.svg"
+        }
+      ]
+    },
+    "views": {
+      "react-todo-sideBar": [
+        {
+          "type": "webview",
+          "id": "react-todo-sideBar-view",
+          "name": "ToDo List",
+          "icon": "src/media/tasklist.svg"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "react-todo.ToDo",
