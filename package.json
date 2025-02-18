@@ -11,7 +11,19 @@
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
+  "enabledApiProposals": [
+    "contribEditorContentMenu"
+  ],
   "contributes": {
+    "menus": {
+      "editor/context": [
+        {
+          "command": "react-todo.ToDo",
+          "group": "Todo@1",
+          "when": "editorTextFocus"
+        }
+      ]
+    },
     "viewsContainers": {
       "activitybar": [
         { 
@@ -41,7 +53,7 @@
   },
   "scripts": {
     "install:all": "npm install && cd webview-ui && npm install",
-    "dev:webview": "cd webview-ui && npm run dev",
+    "dev:webview": "cd webview-ui && npm rf dev",
     "build:webview": "cd webview-ui && npm run build",
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
