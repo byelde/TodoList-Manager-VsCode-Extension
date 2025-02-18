@@ -1,2 +1,2 @@
 export * from "./TodoItem"
-export * from "./TodoPosition"
+export * from "./TodoLocation"

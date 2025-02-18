@@ -1,8 +1,8 @@
-import { TodoPosition } from "./TodoPosition";
+import { TodoLocation } from "./TodoLocation";
 
 export type TodoItem = {
   id: string;
   text: string;
   isChecked: boolean;
-  position: TodoPosition;
+  location: TodoLocation;
 };

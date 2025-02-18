@@ -1,4 +1,4 @@
-export type TodoPosition = {
+export type TodoLocation = {
   path: string | undefined,
   line: number | undefined,
 }

@@ -39,13 +39,13 @@ export const TodoInput = () => {
       id: nanoid(),
       text: text ?? textInput,
       isChecked: false,
-      position: {path: path, line: line}
+      location: {path: path, line: line}
     };
 
     updateTodoList([...todoList, item]);
     setTextInput("");
 
-    console.log(`${item.id} ${item.text} ${item.isChecked} ${item.position} added.`)
+    console.log(`${item.id} ${item.text} ${item.isChecked} ${item.location} added.`)
   }
 
 
