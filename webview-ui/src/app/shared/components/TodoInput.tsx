@@ -5,26 +5,40 @@ import { nanoid } from "nanoid";
 import { useTodoContext } from "../contexts";
 import { TodoItem } from "../types/TodoItem";
 
-
 export const TodoInput = () => {
 
   const [textInput, setTextInput] = useState<string>('');
   const {todoList, updateTodoList} = useTodoContext();
   
+
   // function that receive the data from state, create the object
   // and update the state;
   const addTodoItem = () => {
     if(textInput.length === 0) return;
+  window.addEventListener('message', async (e) => {
+    const message = e.data;
+    switch (message.command){
+      case "addTodoSelection":
+        console.log("ADDED BY CONTEXT");
+        addTodoItem(message.value.path, message.value.line, message.value.text);
+    }
+  });
+
+
+  const addTodoItem = (
+    path: string|undefined = undefined, 
+    line: number|undefined = undefined, 
+    text: string|undefined = undefined
+  ) => {
+    if(textInput.length === 0 && text === undefined) return;
 
     const item: TodoItem = {
       id: nanoid(),
-      text: textInput,
+      text: text ?? textInput,
       isChecked: false,
-      position: {path: undefined, line: undefined}
+      position: {path: path, line: line}
     };
 
-    // unmount the Todo List and mounting including the new
-    // todo item
     updateTodoList([...todoList, item]);
     setTextInput("");
 
@@ -43,15 +57,13 @@ export const TodoInput = () => {
       <VSCodeTextField
         value={textInput}
         onChange={(e)=>{
-          // Converting a react event object into a HTMLInputElement
-          // and getting it data;
           setTextInput((e.target as HTMLInputElement).value)
         }}
         onKeyUp={handleKeyPress}
         placeholder="Enter text here"
       />
 
-      <VSCodeButton onClick={addTodoItem}>
+      <VSCodeButton onClick={()=>{addTodoItem()}}>
         Add
       </VSCodeButton>
       
