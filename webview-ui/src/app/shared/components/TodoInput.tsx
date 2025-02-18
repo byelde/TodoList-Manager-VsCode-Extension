@@ -11,10 +11,10 @@ export const TodoInput = () => {
   const {todoList, updateTodoList} = useTodoContext();
   
 
-  // function that receive the data from state, create the object
-  // and update the state;
-  const addTodoItem = () => {
-    if(textInput.length === 0) return;
+  /**
+   * Listens for a message event on the window and handles the "addTodoSelection" command by calling the `addTodoItem` 
+   * function with the provided path, line, and text values.
+   */
   window.addEventListener('message', async (e) => {
     const message = e.data;
     switch (message.command){
@@ -25,6 +25,9 @@ export const TodoInput = () => {
   });
 
 
+  /**
+   * Adds a new todo item to the todo list.
+   */
   const addTodoItem = (
     path: string|undefined = undefined, 
     line: number|undefined = undefined, 
@@ -45,8 +48,11 @@ export const TodoInput = () => {
     console.log(`${item.id} ${item.text} ${item.isChecked} ${item.position} added.`)
   }
 
-  // Handle the key press event will activate the addTodoItem 
-  // function on VSCodeTextField
+
+  /**
+   * Handles the key press event on the input field. If the user presses the "Enter" key, it calls the `addTodoItem` function to add a new todo item.
+   * @returns `null` if the "Enter" key is not pressed, otherwise it calls the `addTodoItem` function.
+   */
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     return e.key === "Enter" ? addTodoItem() : null;
   }

@@ -7,7 +7,10 @@ import { SidebarProvider } from "./providers/SideBarProvider";
 export function activate(context: ExtensionContext) {
   
   const sidebarProvider = new SidebarProvider(context.extensionUri);
-  // Register the sidebar webview
+  /**
+   * Registers a webview view provider for the "react-todo-sideBar-view" view.
+   * This allows the sidebar provider to render the sidebar webview.
+   */
   context.subscriptions.push(
     window.registerWebviewViewProvider(
       "react-todo-sideBar-view", // This should match the id from the views contribution in the package.json.
@@ -15,7 +18,12 @@ export function activate(context: ExtensionContext) {
     )
   );
 
-  // Register the command to activate the webview panel todolist mode
+
+	/**
+  * Registers a command to render the TodoPanel webview.
+  * When the command is executed, it calls the `render` static method of the `TodoPanel` class,
+  * passing the extension URI as an argument.
+  */
  context.subscriptions.push(
     commands.registerCommand(
       'react-todo.ToDo', // This should match the id from the commands contribution in the package.json.
@@ -23,6 +31,13 @@ export function activate(context: ExtensionContext) {
     )
   );
 
+  
+	/**
+  * Registers a command to add a todo item from the current text selection.
+  * When the command is executed, it retrieves the selected text, the file path, and the line number,
+  * and sends a message to the React component `TodoInput` in `webview-ui/src/app/shared/components/TodoInput.tsx`.
+  * This allows the React component to handle the addition of the todo item.
+  */
  context.subscriptions.push( commands.registerCommand(
     'react-todo.addTodoSelection', // This should match the id from the commands contribution in the package.json.
     () => {
