@@ -12,6 +12,15 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "menus": {
+      "editor/context": [
+        {
+          "group": "Todo@1",
+          "command": "react-todo.addTodoSelection",
+          "when": "editorIsOpen && editorHasSelection"
+        }
+      ]
+    },
     "viewsContainers": {
       "activitybar": [
         { 
@@ -35,6 +44,11 @@
       {
         "command": "react-todo.ToDo",
         "title": "ToDo List",
+        "category": "ToDo"
+      },
+      {
+        "command": "react-todo.addTodoSelection",
+        "title": "Create Todo By Selection",
         "category": "ToDo"
       }
     ]
