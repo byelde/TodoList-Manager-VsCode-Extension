@@ -19,7 +19,8 @@ export const TodoInput = () => {
     const item: TodoItem = {
       id: nanoid(),
       text: textInput,
-      isChecked: false
+      isChecked: false,
+      position: {path: undefined, line: undefined}
     };
 
     // unmount the Todo List and mounting including the new
@@ -27,7 +28,7 @@ export const TodoInput = () => {
     updateTodoList([...todoList, item]);
     setTextInput("");
 
-    console.log(`${item.id} ${item.text} ${item.isChecked} added.`)
+    console.log(`${item.id} ${item.text} ${item.isChecked} ${item.position} added.`)
   }
 
   // Handle the key press event will activate the addTodoItem 
