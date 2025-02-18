@@ -1,8 +1,14 @@
 import { createContext, useContext } from "react";
 import { ITodoList } from "./TodoProvider";
 
-// Create and export TodoContext (used specifically in TodoProvider)
+
+/**
+ * A React context that provides access to a TodoList object, which contains the state and methods for managing a todo list.
+ */
 export const TodoContext = createContext<ITodoList>({} as ITodoList);
 
-// Create and export a aux to use the useContext arguing with TodoContext;
+/**
+ * A custom React hook that provides access to the TodoContext.
+ * @returns The TodoContext object, which contains the state and methods for managing a todo list.
+ */
 export const useTodoContext = () => {return useContext(TodoContext)};

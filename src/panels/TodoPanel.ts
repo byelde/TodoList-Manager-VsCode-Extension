@@ -146,6 +146,15 @@ export class TodoPanel {
    * @param webview A reference to the extension webview
    * @param context A reference to the extension context
    */
+  /**
+   * Sets up an event listener to listen for messages passed from the webview context and
+   * executes code based on the message that is received.
+   *
+   * When a message with the "goToLocation" command is received, this method opens the
+   * specified file and positions the cursor at the given line.
+   *
+   * @param webview A reference to the extension webview
+   */
   private _setWebviewMessageListener(webview: Webview) {
     webview.onDidReceiveMessage(
       (message: any) => {
