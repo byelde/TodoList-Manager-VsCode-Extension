@@ -54,7 +54,7 @@ export const TodoListElement = (props: TodoItem) => {
       <VSCodeButton onClick={deleteTodoItem}>
         <FaTrash/>
       </VSCodeButton>
-      <VSCodeButton onClick={goToTodoLocation}>
+      <VSCodeButton onClick={goToTodoLocation} disabled={!props.location.path}>
         <FaLocationDot/>
       </VSCodeButton>
     </li>
