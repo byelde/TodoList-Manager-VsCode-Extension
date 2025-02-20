@@ -2,12 +2,14 @@
 
 A VS Code extension that provides a convenient Todo list manager right within your editor.
 
+##
+
 ## Features
 
 - Integrated Todo panel in VS Code
-- React-based UI with TypeScript support
-- Real-time updates using VS Code's webview API
-- Modern development setup with Vite
+- Add Todo by selected text
+- Associating the task with its place (file and line) of origin
+- Organize the Todos as you wish using drag and drop
 
 ## Technical Stack
 
