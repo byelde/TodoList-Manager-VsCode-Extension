@@ -1,10 +1,11 @@
-import { VSCodeCheckbox, VSCodeButton } from "@vscode/webview-ui-toolkit/react"
 import { useState } from "react";
+import { VSCodeCheckbox, VSCodeButton } from "@vscode/webview-ui-toolkit/react"
+import { FaTrash } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
 
 import { TodoItem } from "../types/TodoItem"
 import { useTodoContext } from "../contexts";
-
-import { FaTrash } from "react-icons/fa";
+import { vscode } from "../../../vscode";
 
 
 export const TodoListElement = (props: TodoItem) => {
@@ -12,18 +13,26 @@ export const TodoListElement = (props: TodoItem) => {
   const [isChecked, setIsChecked] = useState<boolean>(props.isChecked);
   const {todoList, updateTodoList} = useTodoContext();
 
-  // Deleting the curr Todo List element from Todo list, and updating
-  // the vscode local storage.
+
+  const goToTodoLocation = () => {
+    const todoLocation = props.location;
+    if(todoLocation){
+      vscode.postMessage({
+        command: "goToLocation",
+        value: todoLocation
+      });
+    }
+  }
+
   const deleteTodoItem = () => {
     const newTodoList = todoList.filter((todoItem) => todoItem.id !== props.id);
     updateTodoList(newTodoList);
   }
 
-  // Change the current state of isChecked, update the Todo List and 
-  // passing this to local storage
+
   const toggleTodoItem = () => {
 
-    setIsChecked(!isChecked); // attention! it can be "(prevChecked) => !prevChecked)"
+    setIsChecked(!isChecked);
 
     const newTodoList = todoList.map((currTodoItem) => {
       if(currTodoItem.id === props.id){
@@ -45,6 +54,11 @@ export const TodoListElement = (props: TodoItem) => {
       <VSCodeButton onClick={deleteTodoItem}>
         <FaTrash/>
       </VSCodeButton>
+      <VSCodeButton onClick={goToTodoLocation}>
+        <FaLocationDot/>
+      </VSCodeButton>
     </li>
   )
 }
+
+/// <reference types="../../globals" />

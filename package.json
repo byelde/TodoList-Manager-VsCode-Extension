@@ -15,7 +15,7 @@
     "menus": {
       "editor/context": [
         {
-          "group": "Todo@1",
+          "group": "navigation@3",
           "command": "react-todo.addTodoSelection",
           "when": "editorIsOpen && editorHasSelection"
         }

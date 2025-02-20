@@ -4,7 +4,9 @@ import {
   WebviewView,
   TextDocument,
   WebviewViewProvider,
-  window
+  window,
+  workspace,
+  Selection
 } from "vscode";
 
 import { getNonce, getUri } from "../utilities";
@@ -39,18 +41,22 @@ export class SidebarProvider implements WebviewViewProvider {
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview, this._extensionUri); 
 
     // Set a listener for messages from the webview
-    webviewView.webview.onDidReceiveMessage(async (data) => { 
-      switch (data.type) {
-        case "onInfo": {
-          if (!data.value) { return; }
-          window.showInformationMessage(data.value);
-          break;
-        }
-        case "onError": {
-          if (!data.value) { return; }
-          window.showErrorMessage(data.value);
-          break;
-        }
+    webviewView.webview.onDidReceiveMessage(async (message) => { 
+      const command = message.command;
+      switch (command) {
+        case "goToLocation":
+          const location = message.value;
+          const path = location.path;
+          const line = location.line;
+          console.log(`Opening ${message.value.path} at line ${message.value.line}`);
+
+          workspace.openTextDocument(path)
+            .then((document) => window.showTextDocument(document))
+            .then((editor) => {
+              editor.selection  = new Selection(line, 0, line, 0);
+              editor.revealRange(editor.selection);
+            });
+          return;
       }
     });
   }
@@ -94,6 +100,9 @@ export class SidebarProvider implements WebviewViewProvider {
         <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
 				<link rel="stylesheet" type="text/css" href="${stylesUri}">
         <script type="module" nonce="${nonce}" src="${scriptUri}"></script>
+        <script>
+          tsvscode = acquireVsCodeApi();
+        </script>
 			</head>
       <body>
         <script type="module" nonce="${nonce}" src="${scriptUri}"></script>
