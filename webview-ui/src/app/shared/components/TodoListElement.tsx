@@ -51,6 +51,10 @@ export const TodoListElement = ({index, props}:{index:number, props: TodoItem}) 
     }  });
 
 
+  /**
+   * Navigates to the location associated with the current todo item.
+   * This function is called when the location button for a todo item is clicked.
+   */
   const goToTodoLocation = () => {
     const todoLocation = props.location;
     if(todoLocation){
@@ -61,12 +65,20 @@ export const TodoListElement = ({index, props}:{index:number, props: TodoItem}) 
     }
   }
 
+  /**
+   * Deletes the current todo item from the todo list by filtering out the item with the matching id.
+   * This function is called when the delete button for a todo item is clicked.
+   */
   const deleteTodoItem = () => {
     const newTodoList = todoList.filter((todoItem) => todoItem.id !== props.id);
     updateTodoList(newTodoList);
   }
 
 
+  /**
+   * Toggles the checked state of the current todo item and updates the todo list accordingly.
+   * This function is called when the checkbox for a todo item is clicked.
+   */
   const toggleTodoItem = () => {
 
     setIsChecked(!isChecked);
